@@ -1,0 +1,49 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-factory_bot
+  - rubocop-capybara
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - bin/**/*
+    - db/seeds.rb
+    - db/schema.rb
+
+Style/StringLiterals:
+  Enabled: false
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
+Layout/LineLength:
+  Exclude:
+    - spec/**/*
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+    - config/routes.rb
+Naming/VariableNumber:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Layout/SpaceInsidePercentLiteralDelimiters:
+  Enabled: false
+RSpec/MatchArray:
+  Enabled: false
+RSpec/PredicateMatcher:
+  Enabled: false
+RSpec/NestedGroups:
+  Max: 5
+RSpec/MultipleExpectations:
+  Max: 3
+RSpec/ExampleLength:
+  Max: 20
+RSpec/MultipleMemoizedHelpers:
+  Max: 50
+RSpec/MessageChain:
+  Enabled: false
+RSpec/LetSetup:
+  Enabled: false
+
