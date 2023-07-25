@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>WifirstInterview</title>
+    <title>Wifirst Interview</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,12 +11,8 @@
   </head>
 
   <body>
-    <div class="page-wrapper">
-      <%= render partial: "shared/header" %>
-
-      <div class="content-wrapper">
-        <%= yield %>
-      </div>
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <%= yield %>
     </div>
   </body>
 </html>

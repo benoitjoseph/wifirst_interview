@@ -46,4 +46,7 @@ RSpec/MessageChain:
   Enabled: false
 RSpec/LetSetup:
   Enabled: false
-
+Rails/LexicallyScopedActionFilter:
+  Enabled: false
+RSpec/MessageSpies:
+  Enabled: false

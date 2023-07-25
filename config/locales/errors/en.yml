@@ -1,0 +1,5 @@
+---
+en:
+  errors:
+    types:
+      authentication_failure: "Invalid email or password"
