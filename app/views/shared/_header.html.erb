@@ -1,0 +1,44 @@
+<header id="navbar" class="header navbar navbar-expand-lg bg-gray w-100">
+  <div class="container px-3">
+    <a class="navbar-brand d-flex align-items-center" href="/">
+      <%= image_tag('logo.png', class: 'navbar-brand-img mx-auto', alt: 'logo') %>
+      <h1 class="my-0 ms-3">Weatha</h1>
+    </a>
+
+    <div id="navbarNav" class="offcanvas offcanvas-end">
+      <div class="offcanvas-header border-bottom">
+        <h5 class="offcanvas-title">Menu</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-header border-bottom">
+        <div class="container">
+          <div class="row">
+            <%= form_with(url: sign_out_path, method: :delete, data: { turbo: false }) do |f| %>
+              <%= f.submit "Logout", class: 'btn btn-danger w-100' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="offcanvas-body">
+        <ul class="navbar-nav ms-auto mb-2 me-3 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link" data-bs-toggle="dropdown" aria-current="page">Forecasts</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link" data-bs-toggle="dropdown" aria-current="page">Temperatures</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <%= form_with(url: sign_out_path, method: :delete, data: { turbo: false }, class: 'd-none d-lg-inline-flex') do |f| %>
+      <%= f.submit "Logout", class: 'btn btn-danger' %>
+    <% end %>
+  </div>
+</header>

@@ -25,6 +25,12 @@ gem 'turbo-rails'
 # Serializers
 gem 'jbuilder'
 
+# Encryption
+gem 'bcrypt', '~> 3.1.7'
+
+# Service objects
+gem 'u-case'
+
 # Caching
 gem 'bootsnap', require: false
 
@@ -46,6 +52,7 @@ end
 group :test do
   gem 'capybara'
   gem 'factory_bot_rails'
+  gem 'faker'
   gem 'rspec-rails'
   gem 'selenium-webdriver'
   gem 'webdrivers'

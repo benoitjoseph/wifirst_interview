@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-5 col-xl-4 my-5">
+      <h1 class="text-center mb-3">
+        Welcome back
+      </h1>
+
+      <p class="text-muted text-center mb-5">
+        Sign in to access your dashboard
+      </p>
+
+      <%= render partial: 'shared/flashes' %>
+
+      <%= form_for(@user, url: sign_in_path, method: :post, data: { turbo: false }) do |f| %>
+        <div class="form-group">
+          <%= f.label :email, class: 'form-label' %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'name@address.com' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password, class: 'form-label' %>
+          <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Sign in", class: 'btn btn-lg w-100 btn-primary mb-3' %>
+        </div>
+      <% end %>
+
+      <div class="d-flex justify-content-center">
+        <%= link_to "Don't have an account yet? Sign up", sign_up_path, class: 'text-primary text-center' %>
+      </div>
+    </div>
+  </div>
+</div>
