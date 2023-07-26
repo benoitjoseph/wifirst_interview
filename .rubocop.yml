@@ -8,6 +8,7 @@ AllCops:
   NewCops: enable
   Exclude:
     - bin/**/*
+    - db/migrate/**/*
     - db/seeds.rb
     - db/schema.rb
 
@@ -49,4 +50,6 @@ RSpec/LetSetup:
 Rails/LexicallyScopedActionFilter:
   Enabled: false
 RSpec/MessageSpies:
+  Enabled: false
+RSpec/AnyInstance:
   Enabled: false

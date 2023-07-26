@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   scope module: :authenticated do
-    resource :dashboard, only: [:show]
+    resources :cities, param: :accuweather_key, only: %i[index show]
   end
 
   # Authentication URLs shortcuts
@@ -17,5 +17,5 @@ Rails.application.routes.draw do
   post   'sign_in',  to: 'auth/sessions#create'
   delete 'sign_out', to: 'auth/sessions#destroy'
 
-  root to: 'authenticated/dashboards#show'
+  root to: 'authenticated/cities#index'
 end

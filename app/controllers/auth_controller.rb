@@ -10,7 +10,7 @@ class AuthController < ApplicationController
   def sign_in_and_redirect(user)
     sign_in_user(user)
 
-    redirect_to dashboard_path
+    redirect_to cities_path
   end
 
   def sign_in_user(user)
@@ -22,6 +22,6 @@ class AuthController < ApplicationController
   end
 
   def redirect_if_signed_in
-    redirect_to dashboard_path if current_user
+    redirect_to cities_path if current_user
   end
 end
