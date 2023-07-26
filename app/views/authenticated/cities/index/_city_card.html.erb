@@ -1,14 +1,35 @@
-<div class="card my-3">
-  <%= link_to city_path(accuweather_key: city.accuweather_key), data: { turbo: false } do %>
-    <div class="card-body">
-      <div class="row">
-        <div class="col">
-          <%= city.name %> (<%= city.country %>, <%= city.administrative_area %>)
-        </div>
-        <div class="col-auto">
+<% bookmark ||= false %>
+<% id = bookmark ? "favorite-city-#{city.accuweather_key}" : "city-#{city.accuweather_key}" %>
 
-        </div>
+<div id="<%= id %>" class="col-12 col-sm-6 col-md-4 col-lg-3">
+  <div class="card my-3">
+    <div class="row align-items-center">
+      <div class="col">
+        <%= link_to city_path(accuweather_key: city.accuweather_key), data: { turbo: false } do %>
+          <div class="card-body">
+            <%= city.name %> (<%= city.country %>, <%= city.administrative_area %>)
+          </div>
+        <% end %>
+      </div>
+
+      <div class="col-auto me-3">
+        <% if bookmark %>
+          <%= form_with(
+            url: city_bookmark_path(city.bookmarks.find_by(user_id: current_user.id).id, city_accuweather_key: city.accuweather_key),
+            method: :delete) do |f|
+          %>
+            <button type="submit" class="btn btn-success">
+              <i class="bi bi-bookmark-fill text-white"></i>
+            </button>
+          <% end %>
+        <% else %>
+          <%= form_with(url: city_bookmarks_path(city_accuweather_key: city.accuweather_key), method: :post) do |f| %>
+            <button type="submit" class="btn btn-light">
+              <i class="bi bi-bookmark-fill"></i>
+            </button>
+          <% end %>
+        <% end %>
       </div>
     </div>
-  <% end %>
+  </div>
 </div>
