@@ -14,8 +14,8 @@ class Authenticated::CitiesController < AuthenticatedController
   end
 
   def show
-    fetch_and_refresh_service = Micro::Cases.flow([Cities::Fetch::Service, DailyForecasts::Refresh::Service])
-    result = fetch_and_refresh_service.call(accuweather_key: params[:accuweather_key])
+    result = Micro::Cases.flow([Cities::Fetch::Service, DailyForecasts::Refresh::Service])
+                         .call(accuweather_key: params[:accuweather_key])
 
     if result.success?
       @city = result[:city]

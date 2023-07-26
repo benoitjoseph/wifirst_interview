@@ -27,6 +27,7 @@ gem 'jbuilder'
 
 # Encryption
 gem 'bcrypt', '~> 3.1.7'
+gem 'jwt'
 
 # Service objects
 gem 'u-case'

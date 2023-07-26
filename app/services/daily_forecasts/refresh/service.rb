@@ -33,7 +33,7 @@ module DailyForecasts
         starts_at = Time.zone.parse(forecast_data['Date']).in_time_zone('Europe/Paris')
         ends_at   = starts_at + 1.day
 
-        min_temperature, max_temperature, unit = extract_temperature(forecast_data)
+        min_temperature, max_temperature, unit = extract_temperature_data(forecast_data)
 
         forecast = DailyForecast.unscoped # fetch all forecasts, including expired ones
                                 .find_or_initialize_by(city_id: city.id, starts_at: starts_at, ends_at: ends_at)
@@ -46,7 +46,7 @@ module DailyForecasts
       end
       # rubocop:enable Metrics/MethodLength
 
-      def extract_temperature(forecast_data)
+      def extract_temperature_data(forecast_data)
         min_temperature = forecast_data['Temperature']['Minimum']['Value']
         max_temperature = forecast_data['Temperature']['Maximum']['Value']
         unit            = forecast_data['Temperature']['Minimum']['Unit'] # identical to Maximum

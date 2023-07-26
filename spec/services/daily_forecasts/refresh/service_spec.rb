@@ -32,15 +32,6 @@ RSpec.describe DailyForecasts::Refresh::Service do
     }
   end
 
-  def generate_5_forecasts(expires_at:)
-    5.times.each do |i|
-      create(:daily_forecast, city: city,
-                              starts_at: now + i.days,
-                              ends_at: now + (i + 1).days,
-                              expires_at: expires_at)
-    end
-  end
-
   describe '.call' do
     before do
       allow_any_instance_of(AccuweatherClient).to receive(:daily_forecasts).and_return(mocked_response)

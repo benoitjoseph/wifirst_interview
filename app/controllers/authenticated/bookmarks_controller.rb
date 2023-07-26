@@ -5,8 +5,8 @@ class Authenticated::BookmarksController < AuthenticatedController
   before_action :find_resource, only: :destroy
 
   def create
-    fetch_and_bookmark_service = Micro::Cases.flow([Cities::Fetch::Service, Bookmarks::Create::Service])
-    result = fetch_and_bookmark_service.call(accuweather_key: params[:city_accuweather_key], user: current_user)
+    result = Micro::Cases.flow([Cities::Fetch::Service, Bookmarks::Create::Service])
+                         .call(accuweather_key: params[:city_accuweather_key], user: current_user)
 
     if result.success?
       respond_with_turbo_stream

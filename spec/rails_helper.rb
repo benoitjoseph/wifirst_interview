@@ -25,4 +25,5 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include AuthenticationHelper, type: :controller
   config.include HtmlHelper, type: :controller
+  config.include ApiHelper, type: :controller
 end
