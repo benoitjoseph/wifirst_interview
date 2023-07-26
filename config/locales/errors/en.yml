@@ -3,3 +3,4 @@ en:
   errors:
     types:
       authentication_failure: "Invalid email or password"
+      api_error: "External API error"

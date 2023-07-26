@@ -1,0 +1,14 @@
+<div class="card my-3">
+  <%= link_to city_path(accuweather_key: city.accuweather_key), data: { turbo: false } do %>
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <%= city.name %> (<%= city.country %>, <%= city.administrative_area %>)
+        </div>
+        <div class="col-auto">
+
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

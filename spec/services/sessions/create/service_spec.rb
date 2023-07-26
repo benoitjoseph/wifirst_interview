@@ -2,34 +2,33 @@
 
 require 'rails_helper'
 
-RSpec.describe Auth::Registrations::Create::Service do
+RSpec.describe Sessions::Create::Service do
   let(:service) { described_class }
+  let(:user) { create(:user, email: 'email@domain.com', password: 'password') }
+
+  before { user }
 
   describe '.call' do
-    context 'with valid user params' do
+    context 'with valid credentials' do
       let(:params) do
         {
-          name: 'John Doe',
-          email: 'mail@domain.com',
+          email: 'email@domain.com',
           password: 'password'
         }
       end
 
       it { expect(service.call(params)).to be_success }
-      it { expect { service.call(params) }.to change(User, :count).from(0).to(1) }
     end
 
-    context 'with invalid user params' do
+    context 'with invalid credentials' do
       let(:params) do
         {
-          name: 'John Doe',
-          email: 'invalid_email',
+          email: 'another_email@domain.com',
           password: 'password'
         }
       end
 
       it { expect(service.call(params)).to be_failure }
-      it { expect { service.call(params) }.not_to change(User, :count) }
     end
   end
 end

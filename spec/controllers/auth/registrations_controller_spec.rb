@@ -19,10 +19,10 @@ RSpec.describe Auth::RegistrationsController do
     context 'when user is already signed-in' do
       before { sign_in(user) }
 
-      it 'redirects to dashboard' do
+      it 'redirects to cities index' do
         get :new
 
-        expect(response).to redirect_to(dashboard_path)
+        expect(response).to redirect_to(cities_path)
       end
     end
 
@@ -39,20 +39,20 @@ RSpec.describe Auth::RegistrationsController do
     context 'when user is already signed-in' do
       before { sign_in(user) }
 
-      it 'redirects to dashboard' do
+      it 'redirects to cities index' do
         post :create
 
-        expect(response).to redirect_to(dashboard_path)
+        expect(response).to redirect_to(cities_path)
       end
     end
 
     context 'with valid params' do
       it 'call the service & redirect' do
-        expect(Auth::Registrations::Create::Service).to receive(:call).and_call_original
+        expect(Registrations::Create::Service).to receive(:call).and_call_original
 
         post :create, params: params
 
-        expect(response).to redirect_to(dashboard_path)
+        expect(response).to redirect_to(cities_path)
         expect(User.count).to eq(1)
       end
     end
@@ -61,11 +61,11 @@ RSpec.describe Auth::RegistrationsController do
       let(:email) { 'invalid_email' }
 
       it 'calls the service & does not create a user' do
-        expect(Auth::Registrations::Create::Service).to receive(:call).and_call_original
+        expect(Registrations::Create::Service).to receive(:call).and_call_original
 
         post :create, params: params
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:bad_request)
         expect(User.count).to eq(0)
       end
     end
@@ -74,11 +74,11 @@ RSpec.describe Auth::RegistrationsController do
       before { user }
 
       it 'calls the service & does not create a user' do
-        expect(Auth::Registrations::Create::Service).to receive(:call).and_call_original
+        expect(Registrations::Create::Service).to receive(:call).and_call_original
 
         post :create, params: params
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:bad_request)
         expect(User.count).to eq(1)
       end
     end

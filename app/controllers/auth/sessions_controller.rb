@@ -6,13 +6,9 @@ class Auth::SessionsController < AuthController
   end
 
   def create
-    Auth::Sessions::Create::Service
-      .call(**create_params)
-      .on_success { |result| sign_in_and_redirect(result[:user]) }
-      .on_failure do |result|
-      @user = result[:user]
-      render_service_error(result.type)
-    end
+    Sessions::Create::Service.call(**create_params)
+                             .on_success { |result| sign_in_and_redirect(result[:user]) }
+                             .on_failure { |result| render_session_error(result) }
   end
 
   def destroy
@@ -25,5 +21,11 @@ class Auth::SessionsController < AuthController
 
   def create_params
     params.require(:user).permit(:email, :password)
+  end
+
+  def render_session_error(result)
+    @user = result[:user]
+
+    render_service_error(result.type, action: :new)
   end
 end
