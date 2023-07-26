@@ -54,6 +54,11 @@ RSpec.describe DailyForecasts::Refresh::Service do
 
       it { expect(service.call(params)).to be_success }
       it { expect { service.call(params) }.not_to change(DailyForecast, :count) }
+
+      it 'refreshes the forecasts' do
+        service.call(params)
+        expect(city.daily_forecasts.none?(&:expired?))
+      end
     end
 
     context 'with an API error' do

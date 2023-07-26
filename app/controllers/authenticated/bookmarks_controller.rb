@@ -9,6 +9,7 @@ class Authenticated::BookmarksController < AuthenticatedController
                          .call(accuweather_key: params[:city_accuweather_key], user: current_user)
 
     if result.success?
+      @city = result[:city]
       respond_with_turbo_stream
     else
       render_service_error(result.type, action: :index)

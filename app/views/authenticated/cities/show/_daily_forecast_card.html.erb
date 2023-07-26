@@ -1,17 +1,19 @@
 <div class="card my-3">
-    <div class="card-body">
-      <div class="row">
-        <div class="col">
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <span class="text-muted small fw-bold">
           <% starts_at = daily_forecast.starts_at.in_time_zone('Europe/Paris') %>
           <%= starts_at.strftime('%a') %>
           <%= starts_at.in_time_zone('Europe/Paris').strftime('%d/%m') %>
-        </div>
-        <div class="col-auto">
-          <%= daily_forecast.min_temperature  %>
-          /
-          <%= daily_forecast.max_temperature  %>
-          <%= daily_forecast.temperature_unit %>
-        </div>
+        </span>
+      </div>
+      <div class="col-auto">
+        <%= daily_forecast.min_temperature  %>
+        /
+        <em class="fst-normal fw-bold"><%= daily_forecast.max_temperature  %></em>
+        <%= daily_forecast.temperature_unit %>
       </div>
     </div>
+  </div>
 </div>

@@ -1,9 +1,7 @@
-<div class="my-5">
-  <div id="flashes">
-    <%= render partial: "shared/flashes" %>
-  </div>
-
-  <%= turbo_frame_tag 'cities-section-frame' do %>
-    <%= render partial: 'authenticated/cities/index/cities_section' %>
-  <% end %>
+<div id="flashes">
+  <%= render partial: "shared/flashes" %>
 </div>
+
+<%= turbo_frame_tag 'cities-section-frame' do %>
+  <%= render partial: 'authenticated/cities/index/cities_section' %>
+<% end %>

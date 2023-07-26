@@ -6,10 +6,6 @@ RSpec.describe Api::CitiesController do
   let(:user) { create(:user) }
   let(:city) { create(:city) }
 
-  let(:headers) do
-    { 'Authorization' => "Bearer #{user.access_token}" }
-  end
-
   describe '#index' do
     before do
       request.headers['Authorization'] = "Bearer #{token}"

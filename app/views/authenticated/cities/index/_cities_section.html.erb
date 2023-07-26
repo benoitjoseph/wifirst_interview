@@ -1,17 +1,14 @@
-<!-- Favorite cities -->
-
-<h2>Favorite Cities</h2>
+<h2 class="text-uppercase text-muted fs-4 fw-bold">Favorite Cities</h2>
 
 <%= turbo_frame_tag 'favorite-cities-frame', class: 'row mb-4' do %>
   <% @favorite_cities.each do |city| %>
-    <%= render partial: "authenticated/cities/index/city_card", locals: { city: city, bookmark: true } %>
+    <%= render partial: "authenticated/cities/index/city_card", locals: { city: city } %>
   <% end %>
 <% end %>
 
-<!-- Other cities -->
-<h2>Cities</h2>
+<h2 class="text-uppercase text-muted fs-4 fw-bold">Cities</h2>
 
-<%= form_with(url: cities_path, method: :get) do |f| %>
+<%= form_with(url: cities_path, method: :get, data: { turbo: false }) do |f| %>
   <div class="row">
     <div class="col">
       <input
@@ -30,7 +27,7 @@
 <% end %>
 
 <% if @cities.any? %>
-  <hr class='my-5'>
+  <hr class='my-5 text-muted'>
 
   <%= turbo_frame_tag 'cities-frame', class: 'row' do %>
     <% @cities.each do |city| %>
