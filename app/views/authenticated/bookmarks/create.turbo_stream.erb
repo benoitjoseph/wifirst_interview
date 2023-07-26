@@ -1,0 +1,7 @@
+<turbo-stream action="remove" target="<%= "city-#{@city.accuweather_key}" %>"></turbo-stream>
+
+<turbo-stream action="append" target="favorite-cities-frame">
+  <template>
+    <%= render partial: "authenticated/cities/index/city_card", locals: { city: @city, bookmark: true }, formats: :html %>
+  </template>
+</turbo-stream>

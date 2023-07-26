@@ -2,6 +2,9 @@
 
 class City < ApplicationRecord
   has_many :daily_forecasts, dependent: :destroy
+  has_many :bookmarks,       dependent: :destroy
+
+  scope :bookmarked_by, ->(user) { includes(:bookmarks).where(bookmarks: { user: user }) }
 
   validates :name,                presence: true
   validates :country,             presence: true

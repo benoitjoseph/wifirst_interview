@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Cities::Fetch::RefreshDailyForecasts do
+RSpec.describe DailyForecasts::Refresh::Service do
   let(:service) { described_class }
   let(:city) { create(:city) }
   let(:params) do

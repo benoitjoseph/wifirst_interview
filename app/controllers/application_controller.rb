@@ -11,12 +11,18 @@ class ApplicationController < ActionController::Base
   def render_service_error(error, action: 'new', status: :bad_request)
     flash.now[:danger] = I18n.t("errors.types.#{error}")
 
-    render action, status: status
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('flashes', partial: 'shared/flashes') }
+      format.html { render action, status: status }
+    end
   end
 
   def render_resource_error(resource, action: 'new', status: :unprocessable_entity)
     flash.now[:danger] = resource.errors.full_messages.join(', ')
 
-    render action, status: status
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('flashes', partial: 'shared/flashes') }
+      format.html { render action, status: status }
+    end
   end
 end

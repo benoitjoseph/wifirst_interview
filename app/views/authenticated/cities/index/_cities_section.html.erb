@@ -1,0 +1,40 @@
+<!-- Favorite cities -->
+
+<h2>Favorite Cities</h2>
+
+<%= turbo_frame_tag 'favorite-cities-frame', class: 'row mb-4' do %>
+  <% @favorite_cities.each do |city| %>
+    <%= render partial: "authenticated/cities/index/city_card", locals: { city: city, bookmark: true } %>
+  <% end %>
+<% end %>
+
+<!-- Other cities -->
+<h2>Cities</h2>
+
+<%= form_with(url: cities_path, method: :get) do |f| %>
+  <div class="row">
+    <div class="col">
+      <input
+        class="form-control list-search"
+        type="search"
+        name="query"
+        placeholder="Search cities"
+        value="<%= params[:query] %>"
+      >
+    </div>
+
+    <div class="col-auto">
+      <%= f.submit 'Search', class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>
+
+<% if @cities.any? %>
+  <hr class='my-5'>
+
+  <%= turbo_frame_tag 'cities-frame', class: 'row' do %>
+    <% @cities.each do |city| %>
+      <%= render partial: "authenticated/cities/index/city_card", locals: { city: city } %>
+    <% end %>
+  <% end %>
+<% end %>

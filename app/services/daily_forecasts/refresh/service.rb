@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module Cities
-  module Fetch
-    class RefreshDailyForecasts < Micro::Case
+module DailyForecasts
+  module Refresh
+    class Service < Micro::Case
       MIN_DAILY_FORECASTS      = 5 # next 5 days
       FORECAST_EXPIRATION_TIME = 1.hour
 
@@ -28,13 +28,15 @@ module Cities
         forecasts.size < MIN_DAILY_FORECASTS
       end
 
+      # rubocop:disable Metrics/MethodLength
       def refresh_forecast(forecast_data)
         starts_at = Time.zone.parse(forecast_data['Date']).in_time_zone('Europe/Paris')
         ends_at   = starts_at + 1.day
 
         min_temperature, max_temperature, unit = extract_temperature(forecast_data)
 
-        forecast = city.daily_forecasts.find_or_initialize_by(starts_at: starts_at, ends_at: ends_at)
+        forecast = DailyForecast.unscoped # fetch all forecasts, including expired ones
+                                .find_or_initialize_by(city_id: city.id, starts_at: starts_at, ends_at: ends_at)
         forecast.update!(
           temperature_unit: unit,
           min_temperature: min_temperature,
@@ -42,6 +44,7 @@ module Cities
           expires_at: FORECAST_EXPIRATION_TIME.from_now
         )
       end
+      # rubocop:enable Metrics/MethodLength
 
       def extract_temperature(forecast_data)
         min_temperature = forecast_data['Temperature']['Minimum']['Value']

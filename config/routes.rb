@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   end
 
   scope module: :authenticated do
-    resources :cities, param: :accuweather_key, only: %i[index show]
+    resources :cities, param: :accuweather_key, only: %i[index show] do
+      resources :bookmarks, only: %i[create destroy]
+    end
   end
 
   # Authentication URLs shortcuts
