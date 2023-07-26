@@ -1,13 +1,15 @@
-<div class="my-5">
-  <%= render partial: "shared/flashes" %>
+<%= render partial: "shared/flashes" %>
 
-  <%= link_to "< Back", cities_path %>
+<%= link_to cities_path, class: 'text-muted fw-bold' do %>
+  <i class="bi bi-caret-left-fill"></i>
 
-  <h2 class="mt-5">
-    <%= @city.name %> (<%= @city.country %>, <%= @city.administrative_area %>)
-  </h2>
+  Back
+<% end %>
 
-  <% @city.daily_forecasts.each do |daily_forecast| %>
-    <%= render partial: "authenticated/cities/show/daily_forecast_card", locals: { daily_forecast: daily_forecast } %>
-  <% end %>
-</div>
+<h2 class="text-uppercase text-muted fs-4 fw-bold mt-5">
+  <%= @city.name %> (<%= @city.country %>, <%= @city.administrative_area %>)
+</h2>
+
+<% @city.daily_forecasts.each do |daily_forecast| %>
+  <%= render partial: "authenticated/cities/show/daily_forecast_card", locals: { daily_forecast: daily_forecast } %>
+<% end %>

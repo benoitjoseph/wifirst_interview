@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>WifirstInterview</title>
+    <title>WIFIRST Interview</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:700&display=swap" rel="stylesheet">
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
@@ -14,7 +16,7 @@
     <div class="page-wrapper">
       <%= render partial: "shared/header" %>
 
-      <div class="container">
+      <div class="container my-5">
         <%= yield %>
       </div>
     </div>

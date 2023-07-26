@@ -8,6 +8,7 @@ FactoryBot.define do
     administrative_area        { Faker::Address.state_abbr }
 
     # Can't use create_list because we need consecutive days
+    #
     # Tiny logic duplication but I couldn't figure where to define a
     # method accessible from the FactoryBot hooks
     trait :with_expired_forecasts do

@@ -2,6 +2,6 @@
 
 <turbo-stream action="append" target="favorite-cities-frame">
   <template>
-    <%= render partial: "authenticated/cities/index/city_card", locals: { city: @city, bookmark: true }, formats: :html %>
+    <%= render partial: "authenticated/cities/index/city_card", locals: { city: @city }, formats: :html %>
   </template>
 </turbo-stream>

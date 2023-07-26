@@ -56,4 +56,22 @@ RSpec.describe DailyForecast do
       end
     end
   end
+
+  describe 'methods' do
+    describe '#expired?' do
+      let(:forecast) { create(:daily_forecast, expires_at: expires_at) }
+
+      context 'when expired' do
+        let(:expires_at) { 30.minutes.ago }
+
+        it { expect(forecast).to be_expired }
+      end
+
+      context 'when not expired' do
+        let(:expires_at) { 30.minutes.from_now }
+
+        it { expect(forecast).not_to be_expired }
+      end
+    end
+  end
 end

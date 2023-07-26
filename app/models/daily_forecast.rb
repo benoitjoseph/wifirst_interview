@@ -18,4 +18,8 @@ class DailyForecast < ApplicationRecord
   validates :temperature_unit, presence: true, inclusion: { in: TEMPERATURE_UNITS }
   validates :min_temperature,  presence: true
   validates :max_temperature,  presence: true
+
+  def expired?
+    expires_at < Time.zone.now
+  end
 end
