@@ -1,6 +1,14 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  namespace :api do
+    resources :cities, param: :accuweather_key do
+      collection do
+        get :average_temperature
+      end
+    end
+  end
+
   scope module: :auth do
     resources :registrations, only: %i[new create]
     resources :sessions,      only: %i[new create destroy]
@@ -8,7 +16,8 @@ Rails.application.routes.draw do
 
   scope module: :authenticated do
     resources :cities, param: :accuweather_key, only: %i[index show] do
-      resources :bookmarks, only: %i[create destroy]
+      resources :bookmarks,   only: %i[create destroy]
+      resources :comparisons, only: %i[create destroy]
     end
   end
 

@@ -9,7 +9,7 @@ module Bookmarks
         bookmark = user.bookmarks.find_or_initialize_by(city: city)
         bookmark.save!
 
-        Success(result: { city: city }) # return City for composition
+        Success(result: { city: city })
       end
     end
   end

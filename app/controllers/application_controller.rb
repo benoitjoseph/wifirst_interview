@@ -5,7 +5,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   def current_user
-    @current_user ||= User.find_by(id: session[:user_id])
+    @current_user ||= find_user_by_session
+  end
+
+  def find_user_by_session
+    User.find_by(id: session[:user_id])
   end
 
   def render_service_error(error, action: 'new', status: :bad_request)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_26_104410) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_26_153904) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,6 +34,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_104410) do
     t.index ["country"], name: "index_cities_on_country"
     t.index ["name", "country", "administrative_area"], name: "index_cities_on_name_and_country_and_administrative_area", unique: true
     t.index ["name"], name: "index_cities_on_name"
+  end
+
+  create_table "comparisons", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "city_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "city_id"], name: "index_comparisons_on_user_id_and_city_id", unique: true
   end
 
   create_table "daily_forecasts", force: :cascade do |t|
@@ -65,5 +73,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_104410) do
 
   add_foreign_key "bookmarks", "cities"
   add_foreign_key "bookmarks", "users"
+  add_foreign_key "comparisons", "cities"
+  add_foreign_key "comparisons", "users"
   add_foreign_key "daily_forecasts", "cities"
 end

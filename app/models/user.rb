@@ -8,4 +8,9 @@ class User < ApplicationRecord
   validates :name,  presence: true
   validates :email, presence: true, uniqueness: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+
+  def access_token
+    result = Sessions::GenerateAccessToken::Service.call(user: self)
+    result[:access_token]
+  end
 end
